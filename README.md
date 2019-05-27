@@ -1,4 +1,4 @@
-# personal
+# Persona
 
 > A Vue.js project
 
