@@ -1,12 +1,13 @@
 <template>
- <div id="app" class="container">
-    <nav class="navbar navbar-expand-sm bg-light">
+  <div id="app" class="container">
+    <nav class="navbar navbar-expand-sm bg-dark">
       <ul class="navbar-nav">
-        <li class="nav-item">
-          <router-link :to="{ name: 'Create' }" class="nav-link">Adicionar</router-link>
+        <li class="nav-item ">
+          <router-link :to="{ name: 'Home' }" class="nav-link text-white"><i class="fa fa-home"></i> Home</router-link>
         </li>
         <li class="nav-item">
-          <router-link :to="{ name: 'Index' }" class="nav-link">Listado</router-link>
+          <router-link :to="{ name: 'Index' }" class="nav-link text-white"><i class="fa fa-user"></i> Person
+          </router-link>
         </li>
       </ul>
     </nav>
@@ -19,19 +20,21 @@
 </template>
 
 <script>
-export default {
-  name: 'App'
-}
+  export default {
+    name: 'App'
+  }
 </script>
 
 <style>
-.fade-enter-active, .fade-leave-active {
-  transition: opacity .5s
-}
-.fade-enter, .fade-leave-active {
-  opacity: 0
-}
-.gap {
-  margin-top: 50px;
-}
+  .fade-enter-active, .fade-leave-active {
+    transition: opacity .5s
+  }
+
+  .fade-enter, .fade-leave-active {
+    opacity: 0
+  }
+
+  .gap {
+    margin-top: 50px;
+  }
 </style>

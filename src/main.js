@@ -5,10 +5,14 @@ import VueAxios from 'vue-axios'
 import axios from 'axios'
 import NProgress from 'nprogress'
 import App from './App'
-import router from './router'
-
+import router from './router/router'
+import store from './store/store'
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
 import '../node_modules/nprogress/nprogress.css'
+import '../node_modules/font-awesome/css/font-awesome.min.css'
+
+// set baseUrl from app
+axios.defaults.baseURL = 'http://localhost:4000'
 
 Vue.use(VueAxios, axios)
 
@@ -28,6 +32,7 @@ router.afterEach(() => {
 new Vue({
   el: '#app',
   router,
-  components: { App },
+  store,
+  components: {App},
   template: '<App/>'
 })
