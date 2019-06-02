@@ -1,12 +1,17 @@
-# Persona
+# Persona CRUD
 
 > A Vue.js project
+#####Node + Express + MongoDB + Axios + VueJs + Vuex  
 
 ## Build Setup
 
 ``` bash
 # install dependencies
 npm install
+
+# run node + exress + mongodb
+cd api
+node server.js
 
 # serve with hot reload at localhost:8080
 npm run dev
