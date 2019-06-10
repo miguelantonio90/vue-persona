@@ -2,6 +2,8 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
 
+import {LISTING_PERSON, GET_PERSON_BY_ID, ADD_PERSON, UPDATE_PERSON, DELETE_PERSON} from './mutation-types'
+
 Vue.use(Vuex)
 
 const store = new Vuex.Store({
@@ -24,14 +26,14 @@ const store = new Vuex.Store({
   actions: {
     listingPerson: function ({commit}) {
       axios.get('/persona').then((response) => {
-        commit('LISTING_PERSON', {persona: response.data})
+        commit([LISTING_PERSON], {persona: response.data})
       }, (err) => {
         console.log(err)
       })
     },
     getPersonById: function ({commit, state}, {id}) {
       axios.get('/persona/find/' + id).then((response) => {
-        commit('GET_PERSON_BY_ID', {persona: response.data})
+        commit([GET_PERSON_BY_ID], {persona: response.data})
       }, (err) => {
         console.log(err)
       })
@@ -39,7 +41,7 @@ const store = new Vuex.Store({
     addPerson: function ({commit, state}, {persona}) {
       axios.post('/persona/add', persona).then((response) => {
         if (response.status === 200) {
-          commit('ADD_PERSON', {persona: persona})
+          commit([ADD_PERSON], {persona: persona})
         }
       }, (err) => {
         console.log(err)
@@ -48,7 +50,7 @@ const store = new Vuex.Store({
     updatePerson: function ({commit, state}, {persona}) {
       axios.put('/persona/edit/' + persona._id, persona).then((response) => {
         if (response.status === 200) {
-          commit('UPDATE_PERSON', {persona: response.data.persona})
+          commit([UPDATE_PERSON], {persona: response.data.persona})
         }
       }, (err) => {
         console.log(err)
@@ -57,7 +59,7 @@ const store = new Vuex.Store({
     deletePerson: function ({commit, state}, {persona}) {
       axios.delete('/persona/delete/' + persona._id, persona).then((response) => {
         if (response.status === 200) {
-          commit('DELETE_PERSON', {persona: response.data})
+          commit([DELETE_PERSON], {persona: response.data})
         }
       }, (err) => {
         console.log(err)
@@ -65,20 +67,20 @@ const store = new Vuex.Store({
     }
   },
   mutations: {
-    LISTING_PERSON: (state, {persona}) => {
+    [LISTING_PERSON]: (state, {persona}) => {
       state.personas = persona
     },
-    GET_PERSON_BY_ID: (state, {persona}) => {
+    [GET_PERSON_BY_ID]: (state, {persona}) => {
       state.persona = persona
     },
-    ADD_PERSON: (state, {persona}) => {
+    [ADD_PERSON]: (state, {persona}) => {
       state.personas.push(persona)
     },
-    UPDATE_PERSON: (state, {persona}) => {
+    [UPDATE_PERSON]: (state, {persona}) => {
       let idx = state.personas.map(p => p.id).indexOf(persona._id)
       state.personas.splice(idx, 1, persona)
     },
-    DELETE_PERSON: (state, {persona}) => {
+    [DELETE_PERSON]: (state, {persona}) => {
       let idx = state.personas.map(p => p._id).indexOf(persona._id)
       state.personas.splice(idx, 1)
     }
