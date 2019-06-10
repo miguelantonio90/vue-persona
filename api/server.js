@@ -1,27 +1,35 @@
-const express = require('express'),
-    path = require('path'),
-    bodyParser = require('body-parser'),
-    cors = require('cors'),
-    mongoose = require('mongoose'),
-    config = require('./config/DB');
+const express = require('express')
+const bodyParser = require('body-parser')
+const cors = require('cors')
+const mongoose = require('mongoose')
+const config = require('./config/DB')
 
-    const personaRoutes = require('./routes/persona');
+const personaRoutes = require('./routes/persona')
 
-    mongoose.Promise = global.Promise;
-    mongoose.connect(config.DB).then(
-        () => {console.log('Database is connected') },
-        err => { console.log('Can not connect to the database'+ err)}
-    );
+mongoose.Promise = global.Promise
+mongoose.connect(config.DB).then(
+  () => {
+    console.log('Database is connected')
+  },
+  err => {
+    console.log('Can not connect to the database' + err)
+  }
+)
 
-    const app = express();
-    app.use(express.static('public'));
-    app.use(bodyParser.json());
-    app.use(cors());
+const app = express()
+app.use(express.static('public'))
+app.use(bodyParser.json())
+app.use(cors())
 
-    app.use('/personas', personaRoutes);
-    
-    const port = process.env.PORT || 4000;
+app.use('/persona', personaRoutes)
 
-    const server = app.listen(port, function(){
-        console.log('Listening on port ' + port);
-    });
+const port = process.env.PORT || 4000
+
+// open call
+app.get('/ping', function (req, res) {
+  res.send('All good!, ' + 'API Listening on port ' + port)
+})
+
+app.listen(port, function () {
+  console.log('Listening on port ' + port)
+})

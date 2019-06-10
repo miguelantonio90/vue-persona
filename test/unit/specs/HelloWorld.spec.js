@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import HelloWorld from '@/components/Index'
+import HelloWorld from '@/components/persona/Index'
 
 describe('HelloWorld.vue', () => {
   it('should render correct contents', () => {

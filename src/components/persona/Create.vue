@@ -2,70 +2,75 @@
   <div class="container">
     <div class="card">
       <div class="card-header">
-        <h4>Nueva Persona</h4>
+        <h4>New person</h4>
       </div>
       <div class="card-body">
-        <form v-on:submit.prevent="addPersona">
+        <form v-on:submit.prevent="addPerson">
           <div class="form-body">
-            <h5 class="card-title">Person Info</h5>
+            <h5 class="card-title">Personal information</h5>
             <hr>
             <div class="row p-t-20">
               <div class="col-md-6">
                 <div class="form-group">
-                  <label class="control-label">Nombres</label>
+                  <label class="control-label">Names</label>
                   <input type="text" class="form-control" v-model="persona.firstName">
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-group">
-                  <label class="control-label">Apellidos</label>
-                  <input type="text" class="form-control" v-model="persona.lastName">
+                  <label class="control-label">Last Names</label>
+                  <input type="text" required class="form-control" v-model="persona.lastName">
                 </div>
               </div>
             </div>
             <div class="row">
               <div class="col-md-4">
                 <div class="form-group has-success">
-                  <label class="control-label">Sexo</label>
-                  <select class="form-control" v-model="persona.gender">
-                    <option value="0">Masculino</option>
-                    <option value="1">Femenino</option>
+                  <label class="control-label">Gender</label>
+                  <select class="form-control" name="gender" v-model="persona.gender">
+                    <option value="0">Male</option>
+                    <option value="1">Female</option>
                   </select>
                 </div>
               </div>
               <div class="col-md-4">
                 <div class="form-group">
-                  <label class="control-label">Fecha de nacimiento</label>
-                  <input type="date" class="form-control" placeholder="dd/mm/yyyy" v-model="persona.born">
+                  <label class="control-label">Birth date</label>
+                  <input
+                    type="date"
+                    class="form-control"
+                    placeholder="dd/mm/yyyy"
+                    v-model="persona.born"
+                  >
                 </div>
               </div>
               <div class="col-md-4">
                 <div class="form-group">
-                  <label class="control-label">Edad</label>
-                  <input type="text" class="form-control" v-model="persona.age">
+                  <label class="control-label">Age</label>
+                  <input type="number" class="form-control" v-model="persona.age">
                 </div>
               </div>
             </div>
             <div class="row">
               <div class="col-md-6">
                 <div class="form-group">
-                  <label class="control-label">No. Identidad</label>
-                  <input type="text" class="form-control" v-model="persona.noIdent">
+                  <label class="control-label">No. Identity</label>
+                  <input type="text" required class="form-control" v-model="persona.noIdent">
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-group">
-                  <label class="control-label">Hijos</label>
+                  <label class="control-label">Childern</label>
                   <input type="number" class="form-control" v-model="persona.children">
                 </div>
               </div>
             </div>
-            <h5 class="box-title m-t-40">Extras</h5>
+            <h5 class="box-title m-t-40">Another one</h5>
             <hr>
             <div class="row">
               <div class="col-md-12">
                 <div class="form-group">
-                  <label>Cargo</label>
+                  <label>Position</label>
                   <input type="text" class="form-control" v-model="persona.position">
                 </div>
               </div>
@@ -73,21 +78,26 @@
             <div class="row">
               <div class="col-md-6">
                 <div class="form-group">
-                  <label>Salario</label>
-                  <input type="text" class="form-control" v-model="persona.salary">
+                  <label>Salary</label>
+                  <input type="number" class="form-control" v-model="persona.salary">
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-group">
-                  <label>Raza</label>
+                  <label>Race</label>
                   <input type="text" class="form-control" v-model="persona.race">
                 </div>
               </div>
             </div>
           </div>
           <div class="form-actions">
-            <button type="submit" class="btn btn-primary">Save</button>
-            <button type="button" class="btn btn-danger" @click="$router.push({ name: 'Index' })">Cancel</button>
+            <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-save"></i> Save</button>
+            <button
+              type="button"
+              class="btn btn-sm btn-danger"
+              @click="$router.push({ name: 'Index' })">
+              <i class="fa fa-close"></i> Cancel
+            </button>
           </div>
         </form>
       </div>
@@ -96,26 +106,20 @@
 </template>
 
 <script>
-export default {
-  name: 'Create',
-  components: {
-    name: 'Create'
-  },
-  data () {
-    return {
-      persona: {}
-    }
-  },
-  methods: {
-    addPersona () {
-      let uri = 'http://localhost:4000/personas/add'
-      this.axios.post(uri, this.persona).then(response => {
-        this.$router.push({ name: 'Index' })
-        console.log(response.data)
-      })
+  export default {
+    name: 'Create',
+    data() {
+      return {
+        persona: {}
+      }
+    },
+    methods: {
+      addPerson() {
+        this.$store.dispatch('addPerson', {persona: this.persona})
+        this.$router.push({name: 'Index'})
+      }
     }
   }
-}
 </script>
 
 <style scoped>
