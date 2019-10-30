@@ -20,7 +20,7 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "font-awesome": "^4.7.0",
-    "mongoose": "^5.5.11",
+    "mongoose": "^5.7.5",
     "nprogress": "^0.2.0",
     "vue": "^2.5.2",
     "vue-axios": "^2.1.4",
